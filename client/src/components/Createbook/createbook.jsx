@@ -28,6 +28,7 @@ export default function Createbook() {
             if (input[el] !== "")
                 obj[el] = input[el]
         }
+        console.log(location.state.heading);
         if (location.state.heading === "Update Book") {
             console.log(input);
             //Update Book

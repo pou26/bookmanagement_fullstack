@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import "../mix.css"
 import axios from 'axios'
 import 'react-toastify/dist/ReactToastify.css';
 import { toast, ToastContainer } from 'react-toastify'
 
 export default function Login() {
+    const redirect = useNavigate()
     const [showpass, setShowpass] = useState(false)
     const [inp, setInp] = useState({
         email: "",
@@ -33,11 +34,14 @@ export default function Login() {
             // console.log(inp);
             await axios.post("http://localhost:3001/login", inp)
                 .then((res) => {
-                    console.log(res.data.data);
+                    // console.log(res.data.data);
                     if (res.status === 200) {
-                        toast.success("Login successfull !", {
-                            position: "top-right"
-                        });
+                        setTimeout(() => {
+                            toast.success("Login successfull !", {
+                                position: "top-right"
+                            });
+                        }, 300)
+                        redirect("/home")
                         localStorage.setItem("userdatatoken", res.data.data)
                     }
                 })
@@ -70,7 +74,7 @@ export default function Login() {
                             <label htmlFor="password">Password</label>
                             <div className="two">
                                 <input type={!showpass ? "password" : "text"}
-                                    name= "password"  id='password'
+                                    name="password" id='password'
                                     value={inp.password}
                                     onChange={changeinp}
                                     placeholder='Enter Your Password' />
