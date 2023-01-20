@@ -47,6 +47,7 @@ const getBooks1 = async (req, res) => {
 const getallBook = async (req, res) => {
     try {
         let bookData = await bookModel.find({ isDeleted: false }).select({ isDeleted: 0, createdAt: 0, updatedAt: 0 })
+        let Username = await bookModel.find({ isDeleted: false }).select({ isDeleted: 0, createdAt: 0, updatedAt: 0 })
         if (!bookData) return res.status(404).send({ status: false, msg: "Book not found" })
         // console.log(bookData);
         return res.status(200).send(bookData)

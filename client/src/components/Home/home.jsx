@@ -35,15 +35,15 @@ export default function Home() {
                     {
                         data.map((curElem) => {
 
-                            const { title, _id, excerpt, reviews, category ,ISBN } = curElem;
-                            console.log(ISBN);
+                            const { title, _id,  reviews, category ,ISBN } = curElem;
+                            console.log(data);
                             return (
 
                                 <div className="col-md-4 mx-6 my-3" key={_id}  >
 
                                     <div className="box">
                                         <h5>Book Name : {title}</h5>
-                                        <h5>excerpt: {excerpt}</h5>
+                                        <h5>ISBN: {ISBN}</h5>
                                         <h5>category: {category}</h5>
                                         <h5>reviews: {reviews}</h5>
                                         <div>
@@ -77,15 +77,11 @@ export default function Home() {
 
                                                     />}
                                                 </>
+
                                                 <button type="button" className="btn btn-dark mx-1" onClick={() => {
                                                     redirect("/reviewbook", {
                                                         state: {
-                                                          
-                                                                BookName: title,
-                                                                excerpt: excerpt,
-                                                                category: category,
-                                                                reviews: reviews
-                                                        
+                                                            curElem
                                                         }
                                                     })
                                                 }}  >View</button>

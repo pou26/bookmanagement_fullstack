@@ -4,6 +4,7 @@ const { authontication, authorise } = require("../middlewares/auth")
 const userController = require('../controllers/userController')
 const validationmware = require("../middlewares/validationmware")
 const bookController = require("../controllers/bookController")
+const reviewController = require("../controllers/reviewController")
 
 //login user
 router.post("/login" ,userController.login)
@@ -24,6 +25,10 @@ router.put("/deletebook/:bookId", bookController.deleteBook)
 //get books by query
 // router.get("/books", validationmware.filterbookvalidation, bookController.getBooks1)
 router.get("/books", bookController.getallBook)
+
+//create review
+router.post("/createreview", reviewController.createreview)
+router.get("/getreview/:bookid", reviewController.getreview)
 
 
 module.exports = router

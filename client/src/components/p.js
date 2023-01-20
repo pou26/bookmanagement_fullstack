@@ -7,11 +7,11 @@
 //     let word = s[i]
 //     for (let j = 0; j < word.length; j++) {
 //         let d = word[j].charCodeAt(0)
-       
+
 //         BigInt(temp *= Math.pow(d, 2))
 //     }
 //    BigInt(sum+= temp)  
-    
+
 // }
 // console.log(sum);
 // if (BigInt(sum % 2) == 0) console.log("EVEN")
@@ -49,16 +49,170 @@
 // clothes.length = 0;
 
 // console.log(clothes[0]) // => ???
-setTimeout(()=>{
-console.log("timeout");
-},0)
+// setTimeout(()=>{
+// console.log("timeout");
+// },0)
 
-const object = { x: 10, y: (a) => { return a + object.x } }
+// const object = { x: 10, y: (a) => { return a + object.x } }
 
-console.log(object.y(5))
-console.log(object.y(5))
-setTimeout(()=>{
-console.log("timeout 2");
-},0)
-console.log(object.y(5))
-console.log(object.y(5))
+// console.log(object.y(5))
+// console.log(object.y(5))
+// setTimeout(()=>{
+// console.log("timeout 2");
+// },0)
+// console.log(object.y(5))
+// console.log(object.y(5))
+
+// abc = () => 
+//     5 * 10
+
+// function regularFunction(a, b) {
+//     console.log(arguments)
+// }
+// regularFunction(1, 2)
+// function bcd() 
+//     5 * 20
+
+// console.log(abc());
+// console.log(bcd());
+// function resolveAfter2Seconds() {
+//     return (
+//         setTimeout(() => {
+//             resolve('resolved');
+//         }, 2000))
+
+// }
+
+// async function asyncCall() {
+//     console.log('calling');
+//     const result = await resolveAfter2Seconds();
+//     console.log(result);
+//     // Expected output: "resolved"
+// }
+
+// asyncCall();
+// var a = async () => {
+
+//     await setTimeout(() => {
+//         console.log("runhogaya2");
+//     },
+//         5000)
+
+//     setTimeout(() => {
+//         console.log("runhogaya");
+//     },
+//         2000)
+// }
+// a()
+
+
+// abc = () => {
+//     return new Promise((res, rej) => {
+//         setTimeout(() => {
+//             res("resolved")
+//         }, 2000)
+//     })
+// }
+// fun =  () => {
+//     let result =  abc().then((res) => {
+//         console.log(res);
+//     })
+//     console.log(result)
+//     console.log("abc");
+// }
+// fun()
+
+
+
+// fun = () => {
+//     return new Promise((res) => {
+//         setTimeout(() => {
+//             res(2)
+//         }, 3000)
+//     })
+// }
+// function MatchingCharacters(str) { 
+
+//   var count  = 0
+//     for(var i = 0; i < str.length; i++){
+//       var charObj = {}
+//       let a =str[i]
+//       var lastIdx = str.lastIndexOf(a)
+//       if(i == lastIdx) continue
+//       for(var j = i+1; j < lastIdx; j++){
+//         if(charObj[str[j]] == undefined) charObj[str[j]] = str[j]
+//       }
+//       if(count < Object.keys(charObj).length) count = Object.keys(charObj).length
+//     }
+//     return count
+// }
+
+
+
+// // keep this function call here 
+// console.log(MatchingCharacters("ppuuerrme"));
+// let arr = ["Mobile", "Tv"]
+
+// function popItem() {
+//   return new Promise((resolved, reject) => {
+
+//     setTimeout(() => {
+//       let a = arr.pop()
+//       console.log("The pop value is ", a)
+//       resolved("its , done")
+//     }, 2000)
+//   })
+// }
+
+// function addItem1(item, arr) {
+//   return new Promise((resolved, reject) => {
+//     setTimeout(() => {
+//       arr.push(item)
+//       resolved("yes done")
+//     })
+//   }, 1000)
+// }
+
+// console.log(arr)
+
+// let abc = addItem1("camera", arr)
+//   .then(popItem)
+
+// abc = addItem1("showcase", arr)
+//   .then(popItem)
+
+// abc = addItem1("lamba", arr)
+//   .then(popItem)
+// function foo1() {
+//   return {
+//     "book": 1
+//   }
+// }
+// function foo2() {
+
+//   return{
+//     "book": 1
+//   }
+// }
+// console.log(foo1());
+// console.log(foo2());
+// let arr = [{ k: 4 }, { g: 2 }, { p: 6 }]
+// let arr2 = []
+
+// for (let i = 0; i < arr.length; i++) {
+//   arr2.push({...arr[i]})
+
+// }
+// arr2[1].g = 6
+// console.log(arr);
+// console.log(arr2);
+// let arr = [2, 9, 5, 12, 98, 43]
+// let del = false
+// for (let i = 0; i < arr.length; i++) {
+//   if (arr[i] == 5) del = true
+//   if (del)
+//     arr[i] = arr[i+1]
+
+// }
+// arr.length = arr.length - 1
+// console.log(arr);
