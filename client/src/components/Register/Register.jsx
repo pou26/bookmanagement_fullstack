@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-// import "../mix.css"             //import nhi karne par bhe css properwork kar raha
+import "../mix.css"            
 import { useState } from 'react';
 import axios from "axios"
 import { toast, ToastContainer } from "react-toastify"
@@ -106,7 +106,7 @@ export default function Register() {
         }
     }
     return (
-        <>
+        <div className='register-bg'>
             <section>
                 <div className="form_data" >
                     <div className="form_heading">
@@ -204,6 +204,6 @@ export default function Register() {
                 </div>
             </section>
             <ToastContainer position='top-right' />
-        </>
+        </div>
     )
 }

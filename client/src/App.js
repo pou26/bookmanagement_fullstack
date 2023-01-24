@@ -6,10 +6,12 @@ import Home from './components/Home/home';
 import Reviewbook from './components/Review/Reviewbook';
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 function App() {
+  const AuthorToken = localStorage.getItem("AuthorToken")
+  const UserToken = localStorage.getItem("UserToken")
   return (
 
     <BrowserRouter>
-      <Header />
+      {AuthorToken || UserToken ? <Header /> : null}
       <Routes>
         <Route path='/' element={<Login />} ></Route>
         <Route path='/reviewbook' element={<Reviewbook />} ></Route>

@@ -38,7 +38,7 @@ module.exports = {
             let decode = jwt.verify(token, "secret-Hai-ye-batan-mat")
 
             res.setHeader("header", token)
-            res.status(200).send({ Message: "LoggedIn successfully", data: token, userId: decode.userId, iat: decode.iat, exp: decode.exp })
+            res.status(200).send({ Message: "User LoggedIn", data: token, userId: decode.userId, iat: decode.iat, exp: decode.exp })
         } catch (err) {
             return res.status(500).send({ status: false, message: err.message })
         }

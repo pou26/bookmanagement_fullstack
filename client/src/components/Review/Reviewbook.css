@@ -1,35 +1,51 @@
-/* max-width: 500px;
- margin: 25px auto;
- padding: 35px 10px;
- box-shadow: 0 0 15px -10px #2d3748;
- border-radius: 10px;
- display: flex;
- flex-direction: column;
- align-items: center; */
+.display-book {
+    display: flex;
+    text-align: center;
+    margin-left: 40px;
 
-.leftbox img{
-    max-width: 350px;
-    max-height: 350px;
-    /* flex-direction: column; */
-    box-shadow: 0 0 15px -8px #08090a;
-    margin: 10px ;
 }
-.right-box{
+
+.show-book {
+    margin: 30px;
+   
+}
+
+.show-book :hover {
+    box-shadow: 0 0 25px -9px #08090a;
     max-width: 350px;
     max-height: 250px;
-    /* flex-direction: column; */
+}
+
+.leftbox img {
+    max-width: 350px;
+    max-height: 550px;
     box-shadow: 0 0 15px -8px #08090a;
-    margin: 10px ;
+    margin-top: 55px;
+}
+
+.right-box {
+    max-width: 350px;
+    max-height: 250px;
+    /* box-shadow: 0 0 15px -8px #08090a; */
+    margin-top: 55px;
+    margin-left: 50px;
+}
+
+.book-name {
+    color: #08090a;
+    font-size: larger;
+    font-weight: 500;
+    margin-top: -25px;
 }
 
 .mid-box {
-    max-width: 620px;
-    margin: 10px ;
+    max-width: 680px;
+    margin-left: 60px;
     text-align: center;
     padding: 35px 10px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 0 15px -8px #08090a
+    /* box-shadow: 0 0 15px -8px #08090a; */
 }
 
 .reviewitem {
@@ -45,7 +61,6 @@
 
 .reviewbox {
     max-width: 620px;
-
     margin: -120px auto;
     padding: 35px 10px;
     display: flex;
@@ -65,7 +80,6 @@
     display: flex;
     text-align: start;
     /* margin-left: -410px; */
-
 }
 
 .bitem {
@@ -75,7 +89,6 @@
 .book {
     display: flex;
     text-align: start;
-
 }
 
 .fitem {

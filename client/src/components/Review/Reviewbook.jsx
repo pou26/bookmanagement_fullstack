@@ -40,11 +40,12 @@ export default function Reviewbook() {
     useEffect(() => {
         Getreviewdata()
     }, [])
+    console.log(location.state.data);
     return (
         <>
-            <div style={{ display: "flex", marginLeft :"20px"}} >
+            <div style={{ display: "flex", marginLeft: "20px" }} >
                 <div className="leftbox">
-                    <img src="https://reactjs.org/logo-og.png" alt="React Image" />
+                    <img src={location.state.curElem.link} />
                 </div>
                 <div className='mid-box' >
                     <h1 style={{ fontFamily: "initial", marginTop: "-30px" }} >{location.state.curElem.title}</h1>
@@ -77,28 +78,41 @@ export default function Reviewbook() {
                     Sushant
                 </div>
             </div>
-                <h3 style={{ textAlign: "center" }}>How would you rate your experience for books ?</h3>
-                <div style={{ marginLeft: "30px" }}>
-                    <h5 style={{ color: "black" }}>Submit Book Review</h5>
-                    <input className='btn1' type="text" name='review' onChange={change} value={val.review} />
-                    <button className='btn2' onClick={submitReview}
-                    >
-                        Write a Book review
-                    </button>
-
-                </div>
-                <div className="reviewbox">
-                    {
-                        reviewdata.map((data) => {
-                            // console.log(data);
-                            return <div className="reviewitem" key={data._id}>
-                                <h5 style={{ color: "black" }}>{data.reviewedBy}</h5>
-                                <p style={{ color: "black" }}>{data.review}</p>
-
+            <h3 style={{ marginTop: "25px" }}>  Products related to this item </h3>
+            <div className="display-book" key={location.state.data._id} >
+                {location.state.data.map((data) => {
+                    return (
+                        <div >
+                            <div className="show-book">
+                                <img src={data.link} />
                             </div>
-                        })
-                    }
-               
+                            <p className='book-name'>{data.title}</p>
+                        </div>)
+                })}
+            </div>
+
+            <h3 style={{ textAlign: "center" }}>How would you rate your experience for books ?</h3>
+            <div style={{ marginLeft: "30px" }}>
+                <h5 style={{ color: "black" }}>Submit Book Review</h5>
+                <input className='btn1' type="text" name='review' onChange={change} value={val.review} />
+                <button className='btn2' onClick={submitReview}
+                >
+                    Write a Book review
+                </button>
+
+            </div>
+            <div className="reviewbox">
+                {
+                    reviewdata.map((data) => {
+                        // console.log(data);
+                        return <div className="reviewitem" key={data._id}>
+                            <h5 style={{ color: "black" }}>{data.reviewedBy}</h5>
+                            <p style={{ color: "black" }}>{data.review}</p>
+
+                        </div>
+                    })
+                }
+
             </div>
             <ToastContainer position='top-right' />
         </>

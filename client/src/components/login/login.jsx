@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { toast, ToastContainer } from 'react-toastify'
 
 export default function Login() {
+
     const redirect = useNavigate()
     const [showpass, setShowpass] = useState(false)
     const [inp, setInp] = useState({
@@ -34,7 +35,7 @@ export default function Login() {
             // console.log(inp);
             await axios.post("http://localhost:3001/login", inp)
                 .then((res) => {
-                    // console.log(res.data.data);
+                    console.log(res.data);
                     if (res.status === 200) {
                         setTimeout(() => {
                             toast.success("Login successfull !", {
@@ -42,11 +43,10 @@ export default function Login() {
                             });
                         }, 300)
                         redirect("/home")
-                        localStorage.setItem("userdatatoken", res.data.data)
+                        localStorage.setItem(res.data.Message === "User LoggedIn" ? "UserToken" : "AuthorToken", res.data.data)
                     }
                 })
                 .catch((err) => {
-                    console.log(err.response.data.message);
                     toast.error(err.response.data.message, {
                         position: "top-right"
                     })
@@ -55,7 +55,7 @@ export default function Login() {
     }
 
     return (
-        <>
+        <div className='login-page'>
             <section>
                 <div className="form_datalogin">
                     <div className="form_heading">
@@ -93,6 +93,6 @@ export default function Login() {
             </section >
             <ToastContainer position='top-right' />
 
-        </>
+        </div >
     )
 }

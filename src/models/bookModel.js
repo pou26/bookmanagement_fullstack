@@ -36,6 +36,9 @@ const bookSchema = new mongoose.Schema({
         type: Number,
         default: 0,
     },
+    link: {
+        type: String,
+    },
     deletedAt: {
         type: Date
     },
