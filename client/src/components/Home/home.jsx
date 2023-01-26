@@ -15,11 +15,11 @@ export default function Home() {
     const [modalShow, setModalShow] = React.useState(false);
     const [catagory, setCatagory] = React.useState("")
     const AuthorToken = localStorage.getItem("AuthorToken")
+    const UserToken = localStorage.getItem("UserToken")
     //get all books data
     const GetData = async () => {
         await axios.get("http://localhost:3001/books")
             .then((res) => {
-
                 if (res.status === 200) {
                     setData(res.data)
                 }
@@ -29,10 +29,34 @@ export default function Home() {
     useEffect(() => {
         GetData()
     }, [])
+
     return (
         <div className='page'>
-
+            {UserToken === null && AuthorToken === null ?
+                <>
+                    <h1 style={{ color: "red", fontWeight: "800", marginLeft: "420px", fontSize: "1200" }}>
+                        𝓑𝓸𝓸𝓴 𝓜𝓪𝓷𝓪𝓰𝓶𝓮𝓷𝓽</h1></> : null}
             <div className="home-box">
+                {UserToken === null && AuthorToken === null ?
+                    <>
+                        <div className="home-header">
+                            <div className="home-header-button">
+                                <button style={{ width: "190px" }} onClick={() => {
+                                    redirect("/register", { state: { heading: "Author" } })
+                                }}>Author Registration</button>
+                                <button onClick={() => {
+                                    redirect("/login", { state: { heading: "Author" } })
+                                }}>Author Login</button>
+                                <button style={{ width: "190px" }} onClick={() => {
+                                    redirect("/register", { state: { heading: "User" } })
+                                }}>User Registration</button>
+                                <button onClick={() => {
+                                    redirect("/login", { state: { heading: "User" } })
+                                }}>User Login</button>
+                            </div>
+                        </div>
+                    </> : null}
+
                 <div className='filter-box'>
                     <div className="row1">
                         <button className='flbox-button1'
@@ -69,7 +93,9 @@ export default function Home() {
                 </div>
 
                 <div className="row mt-4" >
+                  
                     {
+
                         data.filter((el) => {
                             return (catagory !== "" || location.state !== null ? el.category === catagory
                                 || el.title === location.state : el)
@@ -93,7 +119,6 @@ export default function Home() {
                                                     style={{
                                                         height: "270px", width: "200px",
                                                         boxShadow: "0 0 20px -10px #f6f6f6",
-
                                                     }} />
                                             </div>
                                         </div>
@@ -107,41 +132,32 @@ export default function Home() {
                                                             redirect("/createbook", { state: { heading: "Update Book", _id } })
                                                         }}  >
                                                             Update</button>
-
                                                         <Button variant="btn btn-dark mx-1"
                                                             onClick={() => setModalShow(!modalShow)}>
                                                             Delete
                                                         </Button>
                                                     </> : null
                                                 }
-
                                                 {modalShow && <Model
                                                     show={modalShow}
                                                     onHide={async () => {
-
                                                         setModalShow(false)
                                                     }}
                                                     Flose={async () => {
-
                                                         await axios.put(`http://localhost:3001/deletebook/${_id}`)
                                                             .then((res) => {
                                                                 if (res.status === 200) {
                                                                     toast.success("Data deleted Successfully !")
                                                                 }
-
                                                             })
                                                         setModalShow(false)
                                                     }}
-
                                                 />}
-
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>)
                         })}
-
                 </div>
             </div>
             <ToastContainer position='top-right' />

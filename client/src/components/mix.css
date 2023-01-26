@@ -1,25 +1,52 @@
-.register-bg{
+.register-bg {
     background-color: #000;
 }
-.login-page{
-    background-color: #6a6969;
+
+.login-page {
+    background-color: #0e0e0e;
 }
+
 section {
     width: 100%;
     padding: 10px;
     min-height: calc(100vh - 80px);
 }
 
+.home-header {
+    display: flex; 
+ 
+}
+
+.home-header-button {
+    margin-left: 125px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+   
+}
+.home-header-button button {
+   height: 35px;
+   width: 130px;
+   border-radius: 10px ;
+   margin-left: 15px;
+   background-color: #ef2121;
+   font-weight: bold;
+   color: rgb(0, 0, 0);
+   border-color: #ef2121;
+}
+.home-header-button button :hover{
+    background-color: #fc3232e0;
+    color: rgb(41, 40, 40);
+}
 section .form_datalogin {
     max-width: 500px;
     margin: 25px auto;
     padding: 35px 10px;
-    box-shadow: 0 0 15px -10px #2d3748;
+    box-shadow: 0 0 11px 2px #e9e9ea;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: white;
+    background-color: rgba(46, 45, 45, 0.541);
 }
 
 
@@ -175,6 +202,7 @@ section .form_data {
     border-radius: 5px;
     cursor: pointer;
 }
+
 .form_input .showpass_register {
     position: absolute;
     right: 0;
@@ -257,9 +285,11 @@ form .btn:hover {
     cursor: pointer;
 
 }
+
 h2 {
     text-align: center;
     margin: 20px 0;
+
 }
 
 .textLeft {
@@ -316,4 +346,3 @@ h2 {
 .number3 {
     font-weight: 500;
 }
-

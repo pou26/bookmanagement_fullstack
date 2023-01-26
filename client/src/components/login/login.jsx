@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import "../mix.css"
 import axios from 'axios'
 import 'react-toastify/dist/ReactToastify.css';
 import { toast, ToastContainer } from 'react-toastify'
 
 export default function Login() {
-
+    const heading = useLocation()
     const redirect = useNavigate()
     const [showpass, setShowpass] = useState(false)
     const [inp, setInp] = useState({
@@ -32,17 +32,20 @@ export default function Login() {
             });
         }
         else {
-            // console.log(inp);
+
             await axios.post("http://localhost:3001/login", inp)
                 .then((res) => {
-                    console.log(res.data);
+                    
                     if (res.status === 200) {
                         setTimeout(() => {
                             toast.success("Login successfull !", {
                                 position: "top-right"
                             });
                         }, 300)
-                        redirect("/home")
+                        redirect("/")
+                        // setTimeout(() => {
+                            window.location.reload();
+                        // },0)
                         localStorage.setItem(res.data.Message === "User LoggedIn" ? "UserToken" : "AuthorToken", res.data.data)
                     }
                 })
@@ -59,19 +62,19 @@ export default function Login() {
             <section>
                 <div className="form_datalogin">
                     <div className="form_heading">
-                        <h1>Welcome Back, Log In</h1>
-                        <p>Hi, we are glad you back. Please login.</p>
+                        <h1 style={{ color: "white" }}>{heading.state.heading} Log In</h1>
+                        <p style={{ color: "white" }}>Hi, we are glad you back. Please login.</p>
                     </div>
                     <form >
                         <div className="form_input">
-                            <label htmlFor="email">Email</label>
+                            <label htmlFor="email" style={{ color: "white" }}>Email</label>
                             <input type="email" name="email" id='email'
                                 value={inp.email}
                                 onChange={changeinp}
                                 placeholder='Enter Your Email Address' />
                         </div>
                         <div className="form_input">
-                            <label htmlFor="password">Password</label>
+                            <label htmlFor="password" style={{ color: "white" }}>Password</label>
                             <div className="two">
                                 <input type={!showpass ? "password" : "text"}
                                     name="password" id='password'
@@ -85,9 +88,11 @@ export default function Login() {
                             </div>
                         </div>
                         <button className="btn" onClick={onlogin} >Login</button>
-                        <Link to={"/register"}>
-                            <p>Don't have an accout? Sign Up</p>
-                        </Link>
+
+                        <p style={{ color: "white" }} onClick={() => {
+                            redirect("/register", { state: { heading: "User" } })
+                        }}>Don't have an accout? Sign Up</p>
+
                     </form>
                 </div>
             </section >

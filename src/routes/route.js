@@ -5,13 +5,13 @@ const userController = require('../controllers/userController')
 const validationmware = require("../middlewares/validationmware")
 const bookController = require("../controllers/bookController")
 const reviewController = require("../controllers/reviewController")
+const { createauthor } = require("../controllers/AuthorController")
 
 //login user
-router.post("/login" ,userController.login)
+router.post("/login", userController.login)
 
 //create user
-
-router.post("/register" ,userController.createUser)
+router.post("/register", userController.createUser)
 
 //create book
 router.post("/books", bookController.createBook)
@@ -22,13 +22,13 @@ router.put("/books/:bookId", bookController.UpdateBook)
 //Delete book
 router.put("/deletebook/:bookId", bookController.deleteBook)
 
-//get books by query
-// router.get("/books", validationmware.filterbookvalidation, bookController.getBooks1)
 router.get("/books", bookController.getallBook)
 
 //create review
 router.post("/createreview", reviewController.createreview)
-router.get("/getreview/:bookid", reviewController.getreview)
 
+router.get("/getreview/:bookid", reviewController.getreview)
+//create author
+router.post("/Author-register", createauthor)
 
 module.exports = router

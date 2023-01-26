@@ -8,16 +8,17 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 function App() {
   const AuthorToken = localStorage.getItem("AuthorToken")
   const UserToken = localStorage.getItem("UserToken")
+  // AuthorToken || UserToken ? window.location.reload() : null 
   return (
-
+   
     <BrowserRouter>
-      {AuthorToken || UserToken ? <Header /> : null}
+      {AuthorToken || UserToken ? <Header/> : null}
       <Routes>
-        <Route path='/' element={<Login />} ></Route>
+        <Route path='/login' element={<Login />} ></Route>
         <Route path='/reviewbook' element={<Reviewbook />} ></Route>
         <Route path='/createbook' element={<Createbook />} ></Route>
         <Route path='/register' element={<Register />} >  </Route>
-        <Route path='/home' element={<Home />} >  </Route>
+        <Route path='/' element={<Home />} >  </Route>
       </Routes>
     </BrowserRouter>
 

@@ -7,14 +7,13 @@ import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import "./header.css"
-import { useState } from 'react';
+import {  useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function NavScrollExample() {
     const [anchorEl, setAnchorEl] = useState(null);
     const [searchval, setSearchval] = useState("")
     const redirect = useNavigate()
-    console.log(searchval);
 
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -23,10 +22,20 @@ function NavScrollExample() {
     const handleClose = () => {
         setAnchorEl(null);
     };
-
     let AuthorToken = localStorage.getItem("AuthorToken")
+    let UserToken = localStorage.getItem("UserToken")
+
+    const logout = () => {
+        if (AuthorToken)
+            localStorage.removeItem("AuthorToken")
+        if (UserToken)
+            localStorage.removeItem("UserToken")
+        setTimeout( redirect("/"), 0)
+        window.location.reload()
+    }
+   
     const Search = () => {
-        redirect("/home", { state: searchval })
+        redirect("/", { state: searchval })
     }
     return (
 
@@ -49,6 +58,9 @@ function NavScrollExample() {
                         </Nav> : null
                     }
                 </Navbar.Collapse>
+                <Button onClick={() => {
+                    redirect("/register", { state: { heading: "Author" } })
+                }} className="me-3">Author Register</Button>
                 <Form className="search" onChange={(e) => {
                     setSearchval(e.target.value)
                 }} value={searchval} >
@@ -69,13 +81,16 @@ function NavScrollExample() {
                     anchorEl={anchorEl}
                     open={open}
                     onClose={handleClose}
+
                     id="basic-menu"
                     MenuListProps={{
                         'aria-labelledby': 'basic-button',
                     }}>
-                    <MenuItem>Logout</MenuItem>
+                    <MenuItem onClick={() => {
+                        logout()
+                        handleClose()
+                    }} >Logout</MenuItem>
                 </Menu>
-
             </Container>
         </Navbar >
     )

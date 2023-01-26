@@ -1,17 +1,17 @@
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import "../mix.css"            
+import "../mix.css"
 import { useState } from 'react';
 import axios from "axios"
 import { toast, ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Register() {
-
+    const heading = useLocation()
     const redirect = useNavigate()
     const [show, setShow] = useState(false)
     const [input, setInput] = useState({
@@ -30,6 +30,7 @@ export default function Register() {
         setInput({ ...input, [name]: value })
     }
     const Register = async (e) => {
+        
         e.preventDefault()
         let { name, email, password, address, city, pincode, phone } = input
 
@@ -84,33 +85,45 @@ export default function Register() {
                 position: "top-right"
             })
         }
-        else {
+        
+        else if (heading.state.heading === "User") {
+          
             await axios.post("http://localhost:3001/register", input)
-
                 .then((res) => {
-                    // toast.success("Registred Successfully !")
-                    // redirect("/")    aaise karne se direct redirect ho ja raha tha message print nhi ho raha tha
-
                     if (res.status === 201) {
-                        toast.success("Registred Successfully !")
+                        toast.success("User Registred Successfully !")
                         setTimeout(() => {
-                            redirect("/")
+                            redirect("/login", { state: { heading: heading.state.heading } })
                         }, 1000)
-
                     }
-
                 }).catch((err) => {
                     toast.error(err.response.data.msg);
-                })// error aane pe  catch run hona chaheya then bhe run ho raha hai   
-            //catch se error bhejne pe bhe console pe error dhek raha hai kya ye sahi hai
+                })
+        }
+        else if (heading.state.heading === "Author") {
+            
+            await axios.post("http://localhost:3001/Author-register", input)
+                .then((res) => {
+                    console.log(res);
+                    if (res.status === 201) {
+                        toast.success("Author Registred Successfully !")
+                        setTimeout(() => {
+                            redirect("/login", { state: { heading: heading.state.heading } })
+                        }, 1000)
+                    }
+                }).catch((err) => {
+                    console.log(err);
+                    toast.error(err.response.data.msg);
+                })
         }
     }
+
     return (
         <div className='register-bg'>
             <section>
                 <div className="form_data" >
                     <div className="form_heading">
-                        <h1>Register</h1>
+                        <h1>{heading.state.heading + " Registration"}</h1>
                         <p>Hi, we are glad you back. Please Register.</p>
                     </div>
                     <form >
@@ -195,9 +208,11 @@ export default function Register() {
                                 </Col>
                             </Row>
                             <button className="btn" onClick={Register} >Register</button>
-                            <Link to={"/"}>
-                                <p>Already Member? Sign In</p>
-                            </Link>
+
+                            <p onClick={() => {
+                                redirect("/login", { state: { heading: heading.state.heading } })
+                            }}>Already Member? Sign In</p>
+
 
                         </Container>
                     </form>

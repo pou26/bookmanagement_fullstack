@@ -216,3 +216,43 @@
 // }
 // arr.length = arr.length - 1
 // console.log(arr);
+
+
+var longestOnes = function (nums, k) {
+
+    // let maxlength = 0
+    // let start = 0
+    // let next = 0
+    // let map = new Map()
+    // map.set(1, 0)
+    // map.set(0, 0)
+    // while (next < nums.length) {
+
+    //     if (map.get(0) <= k)
+    //         map.set(nums[next], map.get(nums[next++]) + 1)
+    //     else if (map.get(0) > k)
+    //         map.set(nums[start], map.get(nums[start++]) - 1)
+    //     if (map.get(0) <= k)
+    //         maxlength = Math.max(map.get(1) + map.get(0), maxlength)
+    // }
+
+    // return maxlength
+    let map = new Map();
+    let maxLength = 0;
+    let left = 0;
+    for (let right = 0; right < nums.length; right++) {
+        let element = nums[right];
+        map.set(element, (map.get(element) || 0) + 1);
+
+        //condition check
+        while (map.get(0) > k && left <= right) {
+            map.set(nums[left], map.get(nums[left]) - 1);
+            left++;
+        }
+
+        maxLength = Math.max(maxLength, right - left + 1);
+    }
+
+    return maxLength;
+};
+console.log(longestOnes(nums = [1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0], k = 2));

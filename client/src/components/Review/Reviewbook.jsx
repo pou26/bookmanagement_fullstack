@@ -1,12 +1,13 @@
 import axios from 'axios'
 import React, { useEffect } from 'react'
 import { useState } from 'react'
-
-import { useLocation } from 'react-router-dom'
+import { redirect, useLocation, useNavigate } from 'react-router-dom'
 import "../Review/Reviewbook.css"
 import { toast, ToastContainer } from 'react-toastify';
 
 export default function Reviewbook() {
+
+    const UserToken = localStorage.getItem("UserToken")
     const location = useLocation()
     const [val, setVal] = useState({
         review: ""
@@ -16,21 +17,30 @@ export default function Reviewbook() {
         let { name, value } = e.target
         setVal({ ...val, [name]: value })
     }
+    const history = useNavigate();
     const submitReview = () => {
-        val.authorname = location.state.curElem.authorname
-        val.bookId = location.state.curElem._id
-        console.log(val);
-        axios.post("http://localhost:3001/createreview", val)
-            .then((res) => {
-                if (res.status === 200)
-                    toast.success("Review added successfully!")
-            })
+
+        if (UserToken == null) {
+            console.log("called");
+            history("/login", { state: { heading: "User" } });
+            // push({ pathname: "/login" })
+        }
+        else {
+            val.authorname = location.state.curElem.authorname
+            val.bookId = location.state.curElem._id
+
+            axios.post("http://localhost:3001/createreview", val)
+                .then((res) => {
+                    if (res.status === 200)
+                        toast.success("Review added successfully!")
+                })
+        }
     }
     const Getreviewdata = () => {
-        console.log(location.state.curElem._id);
+
         axios.get(`http://localhost:3001/getreview/${location.state.curElem._id}`)
             .then((res) => {
-                // console.log(res.data);
+
                 if (res.status === 201)
                     Setreviewdata(res.data)
             }).catch((err) => {
@@ -40,15 +50,15 @@ export default function Reviewbook() {
     useEffect(() => {
         Getreviewdata()
     }, [])
-    console.log(location.state.data);
+    // console.log(location.state.curElem);
     return (
         <>
             <div style={{ display: "flex", marginLeft: "20px" }} >
                 <div className="leftbox">
-                    <img src={location.state.curElem.link} />
+                    <img src={location.state.curElem.link} alt="" />
                 </div>
                 <div className='mid-box' >
-                    <h1 style={{ fontFamily: "initial", marginTop: "-30px" }} >{location.state.curElem.title}</h1>
+                    <h1 style={{ fontFamily: "initial", marginTop: "-30px" }}  >{location.state.curElem.title}</h1>
                     <div className="book">
                         <div className="fitem">By</div>
                         <div className="fitem" style={{ color: "blue" }}>{location.state.curElem.authorname}</div>
@@ -65,7 +75,7 @@ export default function Reviewbook() {
                         <div className="bitem">ratings</div>
                     </div>
                 </div>
-                <div className="right-box">
+                {/* <div className="right-box">
                     Sushant
                     Sushant
                     Sushant
@@ -76,15 +86,23 @@ export default function Reviewbook() {
                     Sushant
                     Sushant
                     Sushant
-                </div>
+                </div> */}
             </div>
             <h3 style={{ marginTop: "25px" }}>  Products related to this item </h3>
             <div className="display-book" key={location.state.data._id} >
-                {location.state.data.map((data) => {
+                {location.state.data.map((data,index) => {
                     return (
-                        <div >
+                        <div key={index} >
                             <div className="show-book">
-                                <img src={data.link} />
+                                <img src={data.link} alt="" onClick={() => {
+                                    console.log("aaaaaaa");
+                                    history("/reviewbook", {
+                                        state: {
+                                            curElem: data,
+                                            data: location.state.data
+                                        }
+                                    })
+                                }} />
                             </div>
                             <p className='book-name'>{data.title}</p>
                         </div>)
@@ -101,15 +119,15 @@ export default function Reviewbook() {
                 </button>
 
             </div>
-            <div className="reviewbox">
+            <div className="reviewbox" >
                 {
                     reviewdata.map((data) => {
                         // console.log(data);
-                        return <div className="reviewitem" key={data._id}>
+                        return (<div className="reviewitem" key={data._id}>
                             <h5 style={{ color: "black" }}>{data.reviewedBy}</h5>
                             <p style={{ color: "black" }}>{data.review}</p>
 
-                        </div>
+                        </div>)
                     })
                 }
 
