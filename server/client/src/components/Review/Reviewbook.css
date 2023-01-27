@@ -1,0 +1,115 @@
+.display-book {
+    display: flex;
+    text-align: center;
+    margin-left: 40px;
+
+}
+
+.show-book {
+    margin: 30px;
+   
+}
+
+.show-book :hover {
+    box-shadow: 0 0 25px -9px #08090a;
+    max-width: 350px;
+    max-height: 250px;
+}
+
+.leftbox img {
+    max-width: 350px;
+    max-height: 550px;
+    box-shadow: 0 0 15px -8px #08090a;
+    margin-top: 55px;
+}
+
+.right-box {
+    max-width: 350px;
+    max-height: 250px;
+    /* box-shadow: 0 0 15px -8px #08090a; */
+    margin-top: 55px;
+    margin-left: 50px;
+}
+
+.book-name {
+    color: #08090a;
+    font-size: larger;
+    font-weight: 500;
+    margin-top: -25px;
+}
+
+.mid-box {
+    max-width: 680px;
+    margin-left: 60px;
+    text-align: center;
+    padding: 35px 10px;
+    display: flex;
+    flex-direction: column;
+    /* box-shadow: 0 0 15px -8px #08090a; */
+}
+
+.reviewitem {
+    max-width: 500px;
+    padding: 35px 10px;
+    /* box-shadow: 0 0 15px -10px #2d3748; */
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    margin: -30px;
+}
+
+.reviewbox {
+    max-width: 620px;
+    margin: -120px auto;
+    padding: 35px 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    /* box-shadow: 0 0 15px -10px #2d3748; */
+}
+
+.book1 {
+    display: flex;
+    text-align: start;
+    /* margin-left: -410px; */
+
+}
+
+.book2 {
+    display: flex;
+    text-align: start;
+    /* margin-left: -410px; */
+}
+
+.bitem {
+    margin: 4px;
+}
+
+.book {
+    display: flex;
+    text-align: start;
+}
+
+.fitem {
+    margin: 2px;
+}
+
+
+.btn2 {
+    align-items: center;
+    background-color: transparent;
+    border-radius: 8px;
+    padding: 15px 5px;
+    height: 45px;
+    width: 180px;
+    border: white;
+    box-shadow: 0 0 18px -10px #08090a;
+    cursor: pointer;
+    margin: 5px;
+    display: flex;
+}
+
+.btn2:hover {
+    background-color: rgb(186, 186, 186);
+}
